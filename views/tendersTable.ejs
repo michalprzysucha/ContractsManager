@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Tabela przetargów</h2>
+
+    <table>
+      <thead>
+      <tr>
+        <th>LP</th>
+        <th>Nazwa</th>
+        <% if (tenders[0].startDate) { %>
+          <th>Data rozpoczęcia</th>
+          <th>Data zakończenia</th>
+        <% } else { %>
+          <th>Status</th>
+        <% } %>
+
+      </tr>
+      </thead>
+      <tbody>
+      <% var lp = 0; tenders.forEach(function(tender) { %>
+        <% lp++; %>
+        <tr>
+          <td><%= lp %></td>
+          <td><a href="/tenders/<%= tender.id %>"><%= tender.name %></a></td>
+          <% if (tender.startDate) { %>
+            <td><%= tender.startDate.toLocaleDateString("pl") %> <%= tender.startDate.toLocaleTimeString("pl"); %></td>
+            <td><%= tender.endDate.toLocaleDateString("pl") %> <%= tender.endDate.toLocaleTimeString("pl") %></td>
+          <% } else { %>
+            <td><%= "Zakończony" %></td>
+          <% } %>
+        </tr>
+      <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>

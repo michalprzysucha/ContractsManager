@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= tender.name %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= tender.name %></h1>
+
+    <p><b>Instytucja zamawiająca: </b> <%= tender.contractingAuthority.dataValues.name %></p>
+    <p><b>Data i godzina rozpoczęcia przetargu: </b> <%= tender.startDate.toLocaleDateString("pl") %> <%= tender.startDate.toLocaleTimeString("pl") %> </p>
+    <p><b>Data i godzina zakończenia przetargu: </b> <%= tender.endDate.toLocaleDateString("pl") %> <%= tender.endDate.toLocaleTimeString("pl") %></p>
+    <% if (tender.description.length > 0) { %>
+      <p><b>Opis:</b></p>
+      <p><%= tender.description %></p>
+    <% } %>
+    <p><b>Maksymalny budżet zamawiającego: </b><%= tender.budget.toFixed(2) %> zł</p>
+
+    <% const now = new Date(); if (tender.endDate <= now) { %>
+      <h2>Tabela ofert</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>LP</th>
+          <th>Nazwa fimry</th>
+          <th>Data i czas wpłynięcia oferty</th>
+          <th>Proponowana cena</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% var hasOfferWithinBudget = false %>
+        <% var lp = 0; tender.offers.forEach(function(offer) { %>
+            <% lp++; %>
+            <tr>
+              <td><%= lp %></td>
+              <td><%= offer.company.name %></td>
+              <td><%= offer.submissionDate.toLocaleDateString("pl") %> <%= offer.submissionDate.toLocaleTimeString("pl") %></td>
+              <td><%= offer.price.toFixed(2) %> zł</td>
+            </tr>
+            <% if (offer.price <= tender.budget) { %>
+             <% hasOfferWithinBudget = true; %>
+            <% } %>
+          <% }); %>
+
+        <% } else if (tender.startDate <= now && tender.endDate > now) { %>
+          <p>Przetarg jest aktywny. Możesz dodać ofertę!</p>
+          <a href="/offers/add/<%= tender.id %>"><button type="button">Dodaj ofertę</button></a>
+        <% } %>
+        </tbody>
+      </table>
+
+      <% if (!hasOfferWithinBudget) { %>
+        <p>Przetarg zakończony bez roztrzygnięcia. Brak ofert, które miesciłyby się w budżecie</p>
+      <% } %>
+  </body>
+</html>
