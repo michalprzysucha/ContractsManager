@@ -15,7 +15,7 @@ const postCompany = async(req,res) => {
 
     let success = await companyService.postCompany(company);
     if(success) {
-        res.status(200);
+        res.sendStatus(200)
     }
     else{
         res.send(success);
