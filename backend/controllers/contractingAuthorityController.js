@@ -18,7 +18,8 @@ const postCa = async(req,res) => {
 }
 
 const getCa = async(req,res) => {
-    res.json({institutions: [{id: 15, name: "abcd"},{id: 16, name: "efgh"}]})
+    const allInstitutions= await caService.getCa()
+    res.json(allInstitutions)
 }
 
 module.exports = {

@@ -16,7 +16,7 @@ function App() {
           <li><Link to="/ca/add">Dodaj instytucję publiczną</Link></li>
         </ul>
         <Routes>
-          <Route path="/tenders/add" element={<TenderForm/>} />
+          <Route path="/tenders/add" element={<TenderForm value={"tender"}/>} />
           <Route path="/companies/add" element={<ClientForm value={"company"}/>} />
           <Route path="/ca/add" element={<ClientForm value={"institution"}/>} />
           <Route path="/addedSuccessful" element={<AddedSuccessful/>}/>

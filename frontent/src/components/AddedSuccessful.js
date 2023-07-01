@@ -13,9 +13,19 @@ export const AddedSuccessful = () => {
             <p>Pomyślnie dodano firmę!</p>
         )
     }
-    else{
+    else if (state==="institution"){
         return(
             <p>Pomyślnie dodano instytucję!</p>
+        )
+    }
+    else if (state==="tender"){
+        return(
+            <p>Pomyślnie dodano przetarg!</p>
+        )
+    }
+    else{
+        return(
+            <p>Pomyślnie dodano!</p>
         )
     }
 }
