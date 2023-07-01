@@ -14,3 +14,5 @@ export const CompanyForm = () => {
         </div>
     )
 }
+
+export default CompanyForm;
