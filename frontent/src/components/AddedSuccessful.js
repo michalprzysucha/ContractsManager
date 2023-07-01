@@ -1,6 +1,11 @@
 import { useLocation } from "react-router-dom";
+import {useEffect} from "react";
 
 export const AddedSuccessful = () => {
+    useEffect(() => {
+        document.title='Sukces!';
+    }, []);
+
     const { state } = useLocation();
 
     if(state==="company"){

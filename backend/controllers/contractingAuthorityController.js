@@ -17,7 +17,12 @@ const postCa = async(req,res) => {
     res.render("ContractingAuthorityForm", {success: success});
 }
 
+const getCa = async(req,res) => {
+    res.json({institutions: [{id: 15, name: "abcd"},{id: 16, name: "efgh"}]})
+}
+
 module.exports = {
     getCaCreationForm,
-    postCa
+    postCa,
+    getCa
 }

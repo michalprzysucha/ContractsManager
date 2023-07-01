@@ -1,7 +1,12 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Navigate} from "react-router-dom";
 
 export const ClientForm = (props) => {
+    useEffect(() => {
+        document.title='Formularz';
+    }, []);
+
+
     const [added, setAdded] = useState('');
     function handleSubmit(e) {
         // Prevent the browser from reloading the page
