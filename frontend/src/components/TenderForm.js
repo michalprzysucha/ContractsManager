@@ -32,19 +32,31 @@ export const TenderForm = (props) => {
         const form = e.target;
         const formData = new FormData(form);
 
-    /*
-       const requestOptions = {
+        const requestOptions = {
             method: 'POST',
-            body: JSON.stringify({ username: formData.get("name")})
-        };
-        fetch('http://localhost:3000/login', requestOptions)
-            .then(function(response){
-                if(response.status===200) {setAdded(true)}
-                else{setWrong(true)}
-            });
-  */
+            headers: {
+                'Content-type': "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    tender_name: formData.get("tender_name"),
+                    start_date: formData.get("start_date"),
+                    end_date: formData.get("end_date"),
+                    description: formData.get("description"),
+                    budget: formData.get("budget"),
+                    ca: formData.get("ca")
+                }
+            )
+        }
 
-        setAdded(true)
+        fetch('http://localhost:3000/tenders/add', requestOptions)
+            .then(function (response) {
+                if (response.status === 200) {
+                    setAdded(true)
+                } else {
+                    setError(true);
+                }
+            })
     }
 
 
@@ -88,7 +100,7 @@ export const TenderForm = (props) => {
 
                     <label>Instytuacja zamawiająca:{' '}
                         <select name="ca">
-                            <option value="">--Wybierz instytucję--</option>
+                            <option value={-1}>--Wybierz instytucję--</option>
                             {institutions.map((institution) =>
                                 (<option value={institution.id} key={institution.id}>
                                     {institution.name} &nbsp;

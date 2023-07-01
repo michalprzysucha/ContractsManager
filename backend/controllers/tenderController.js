@@ -32,13 +32,20 @@ const postTender = async(req,res) => {
         name: req.body.tender_name,
         startDate: req.body.start_date,
         endDate: req.body.end_date,
-        description: req.body.desc,
+        description: req.body.description,
         budget: req.body.budget,
         contractingAuthorityId: req.body.ca
     };
 
     let success = await tenderService.postTender(tender);
-    res.render("tenderForm", {ca: contractingAuthorities, success: success});
+    console.log(success)
+
+    if(success) {
+        res.sendStatus(200)
+    }
+    else{
+        res.send(success);
+    }
 }
 
 module.exports = {
