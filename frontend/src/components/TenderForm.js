@@ -103,3 +103,5 @@ export const TenderForm = (props) => {
         )
     }
 }
+
+export default TenderForm;

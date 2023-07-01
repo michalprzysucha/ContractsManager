@@ -1,8 +1,10 @@
 import {Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
-import CompanyForm from "./components/CompanyForm";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
+import ClientForm from "./components/ClientForm";
+import AddedSuccessful from "./components/AddedSuccessful";
+import TenderForm from "./components/TenderForm";
 
 function Router(){
     return (
@@ -10,8 +12,15 @@ function Router(){
             <Route path="/" element={<Layout />} >
                 <Route index element={<Home />} />
                 <Route path="companies">
-                    <Route path="add" element={<CompanyForm />} />
+                    <Route path="add" element={<ClientForm value={"company"}/>} />
                 </Route>
+                <Route path="ca">
+                    <Route path="add" element={<ClientForm value={"institution"}/>} />
+                </Route>
+                <Route path="tenders">
+                    <Route path="add" element={<TenderForm value={"tender"}/>} />
+                </Route>
+                <Route path="/addedSuccessful" element={<AddedSuccessful/>}/>
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
