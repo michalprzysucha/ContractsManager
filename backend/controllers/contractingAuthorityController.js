@@ -17,7 +17,13 @@ const postCa = async(req,res) => {
     res.render("ContractingAuthorityForm", {success: success});
 }
 
+const getCa = async(req,res) => {
+    const allInstitutions= await caService.getCa()
+    res.json(allInstitutions)
+}
+
 module.exports = {
     getCaCreationForm,
-    postCa
+    postCa,
+    getCa
 }
