@@ -2,9 +2,10 @@ import {Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
-import ClientForm from "./components/ClientForm";
-import AddedSuccessful from "./components/AddedSuccessful";
-import TenderForm from "./components/TenderForm";
+import {ClientForm} from "./components/ClientForm";
+import {AddedSuccessful} from "./components/AddedSuccessful";
+import {TenderForm} from "./components/TenderForm";
+import TenderDetails from "./components/TenderDetails";
 
 function Router(){
     return (
@@ -19,6 +20,7 @@ function Router(){
                 </Route>
                 <Route path="tenders">
                     <Route path="add" element={<TenderForm value={"tender"}/>} />
+                    <Route path=":id" element={<TenderDetails/>} />
                 </Route>
                 <Route path="/addedSuccessful" element={<AddedSuccessful/>}/>
                 <Route path="*" element={<NotFound />} />

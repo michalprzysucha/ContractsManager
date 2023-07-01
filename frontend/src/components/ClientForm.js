@@ -70,5 +70,3 @@ export const ClientForm = (props) => {
         </div>
     )
 }
-
-export default ClientForm;

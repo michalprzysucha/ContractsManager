@@ -18,7 +18,7 @@ const getClosedTenders = async(req,res) => {
 
 const getTenderDetails = async(req,res) => {
     const tender =  await tenderService.getTenderDetails(req.params.id);
-    res.render("tenderDetails", {tender: tender[0].dataValues})
+    res.json(tender);
 }
 
 const getTenderCreationForm = async(req,res) => {

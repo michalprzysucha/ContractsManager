@@ -29,5 +29,3 @@ export const AddedSuccessful = () => {
         )
     }
 }
-
-export default AddedSuccessful;
