@@ -3,17 +3,7 @@ import {Navigate} from "react-router-dom";
 
 
 async function getInstitutions() {
-    const requestOptions = {
-        method: "get",
-        mode: "no-cors",
-        headers: {
-            "Access-Control-Allow-Origin": "*"
-        }
-    };
-
-
-    //return await fetch('http://localhost:3000/ca/list)')
-    return await fetch('http://localhost:3000/ca/list)', requestOptions)
+    return await fetch('http://localhost:3000/ca/list')
         .then(response => response.json())
 }
 
