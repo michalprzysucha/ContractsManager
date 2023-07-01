@@ -3,9 +3,10 @@ import {Navigate} from "react-router-dom";
 
 export const TenderForm = (props) => {
     const [error, setError] = useState(null);
+    const [serverError, setServerError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [institutions, setInstitutions] = useState('');
-    const [added, setAdded] = useState('');
+    const [added, setAdded] = useState(false);
 
     useEffect(() => {
         document.title='Dodaj przetarg';
@@ -32,19 +33,31 @@ export const TenderForm = (props) => {
         const form = e.target;
         const formData = new FormData(form);
 
-    /*
-       const requestOptions = {
+        const requestOptions = {
             method: 'POST',
-            body: JSON.stringify({ username: formData.get("name")})
-        };
-        fetch('http://localhost:3000/login', requestOptions)
-            .then(function(response){
-                if(response.status===200) {setAdded(true)}
-                else{setWrong(true)}
-            });
-  */
+            headers: {
+                'Content-type': "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    tender_name: formData.get("tender_name"),
+                    start_date: formData.get("start_date"),
+                    end_date: formData.get("end_date"),
+                    description: formData.get("description"),
+                    budget: formData.get("budget"),
+                    ca: formData.get("ca")
+                }
+            )
+        }
 
-        setAdded(true)
+        fetch('http://localhost:3000/tenders/add', requestOptions)
+            .then((response)=> {
+                if (response.status === 200) {
+                    setAdded(true)
+                } else {
+                    setServerError(true)
+                }
+            })
     }
 
 
@@ -57,6 +70,7 @@ export const TenderForm = (props) => {
         return (
             <div>
                 {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
+                {serverError && <p>Wystąpił błąd!</p>}
 
                 <h1>Formularz dodawania przetargu</h1>
 
@@ -88,7 +102,7 @@ export const TenderForm = (props) => {
 
                     <label>Instytuacja zamawiająca:{' '}
                         <select name="ca">
-                            <option value="">--Wybierz instytucję--</option>
+                            <option value={-1}>--Wybierz instytucję--</option>
                             {institutions.map((institution) =>
                                 (<option value={institution.id} key={institution.id}>
                                     {institution.name} &nbsp;

@@ -10,11 +10,17 @@ const getCaCreationForm = async(req,res) => {
 
 const postCa = async(req,res) => {
     const ca = {
-        name: req.body.ca_name
+        name: req.body.name
     };
 
-    let success = await caService.postCa(ca);
-    res.render("ContractingAuthorityForm", {success: success});
+    let result = await caService.postCa(ca);
+    if(result===1) {
+        res.sendStatus(200)
+    }
+    else{
+        console.log(result)
+        res.sendStatus(400)
+    }
 }
 
 const getCa = async(req,res) => {

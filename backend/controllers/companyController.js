@@ -13,12 +13,13 @@ const postCompany = async(req,res) => {
         name: req.body.name
     };
 
-    let success = await companyService.postCompany(company);
-    if(success) {
+    let result = await companyService.postCompany(company);
+    if(result===1) {
         res.sendStatus(200)
     }
     else{
-        res.send(success);
+        console.log(result)
+        res.sendStatus(400)
     }
 }
 
