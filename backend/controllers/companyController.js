@@ -10,11 +10,16 @@ const getCompanyCreationForm = async(req,res) => {
 
 const postCompany = async(req,res) => {
     const company = {
-        name: req.body.company_name
+        name: req.body.name
     };
 
     let success = await companyService.postCompany(company);
-    res.render("companyForm", {success: success});
+    if(success) {
+        res.status(200);
+    }
+    else{
+        res.send(success);
+    }
 }
 
 module.exports = {

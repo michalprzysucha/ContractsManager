@@ -6,8 +6,9 @@ export const ClientForm = (props) => {
         document.title='Formularz';
     }, []);
 
-
     const [added, setAdded] = useState('');
+    const [error, setError] = useState('');
+
     function handleSubmit(e) {
         // Prevent the browser from reloading the page
         e.preventDefault();
@@ -15,25 +16,36 @@ export const ClientForm = (props) => {
         const form = e.target;
         const formData = new FormData(form);
 
-    /*
-       const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify({ username: formData.get("name")})
-        };
-        fetch('http://localhost:3000/login', requestOptions)
-            .then(function(response){
-                if(response.status===200) {setAdded(true)}
-                else{setWrong(true)}
-            });
-  */
-      //  console.log(formData.get("name"));
+        let url;
+        if(props.value==="company") {
+            url='http://localhost:3000/companies/add'
+        }
+        else{
+            url='http://localhost:3000/ca/add'
+        }
 
-        setAdded(true)
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-type': "application/json"
+            },
+            body: JSON.stringify({ name: formData.get("name")})
+        };
+
+        fetch(url, requestOptions)
+            .then(function (response) {
+                if (response.status === 200) {
+                    setAdded(true)
+                } else {
+                    setError(true);
+                }
+            })
     }
 
     return (
         <div>
             {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
+            {error && <p>Wystąpił błąd!</p>}
 
             { props.value==="company" ?
                 <h1>Formularz dodawania firmy</h1>
