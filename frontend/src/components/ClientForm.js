@@ -6,8 +6,8 @@ export const ClientForm = (props) => {
         document.title='Formularz';
     }, []);
 
-    const [added, setAdded] = useState('');
-    const [error, setError] = useState('');
+    const [added, setAdded] = useState(false);
+    const [serverError, setServerError] = useState(false);
 
     function handleSubmit(e) {
         // Prevent the browser from reloading the page
@@ -33,11 +33,11 @@ export const ClientForm = (props) => {
         };
 
         fetch(url, requestOptions)
-            .then(function (response) {
+            .then((response)=> {
                 if (response.status === 200) {
                     setAdded(true)
                 } else {
-                    setError(true);
+                    setServerError(true);
                 }
             })
     }
@@ -45,7 +45,7 @@ export const ClientForm = (props) => {
     return (
         <div>
             {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
-            {error && <p>Wystąpił błąd!</p>}
+            {serverError && <p>Wystąpił błąd!</p>}
 
             { props.value==="company" ?
                 <h1>Formularz dodawania firmy</h1>

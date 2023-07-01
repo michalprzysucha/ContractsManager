@@ -37,14 +37,14 @@ const postTender = async(req,res) => {
         contractingAuthorityId: req.body.ca
     };
 
-    let success = await tenderService.postTender(tender);
-    console.log(success)
+    let result = await tenderService.postTender(tender);
 
-    if(success) {
+    if(result===1) {
         res.sendStatus(200)
     }
     else{
-        res.send(success);
+        console.log(result)
+        res.sendStatus(400)
     }
 }
 

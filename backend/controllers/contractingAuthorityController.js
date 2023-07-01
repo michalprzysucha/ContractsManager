@@ -13,12 +13,13 @@ const postCa = async(req,res) => {
         name: req.body.name
     };
 
-    let success = await caService.postCa(ca);
-    if(success) {
+    let result = await caService.postCa(ca);
+    if(result===1) {
         res.sendStatus(200)
     }
     else{
-        res.send(success);
+        console.log(result)
+        res.sendStatus(400)
     }
 }
 

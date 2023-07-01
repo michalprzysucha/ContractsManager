@@ -3,9 +3,10 @@ import {Navigate} from "react-router-dom";
 
 export const TenderForm = (props) => {
     const [error, setError] = useState(null);
+    const [serverError, setServerError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [institutions, setInstitutions] = useState('');
-    const [added, setAdded] = useState('');
+    const [added, setAdded] = useState(false);
 
     useEffect(() => {
         document.title='Dodaj przetarg';
@@ -50,11 +51,11 @@ export const TenderForm = (props) => {
         }
 
         fetch('http://localhost:3000/tenders/add', requestOptions)
-            .then(function (response) {
+            .then((response)=> {
                 if (response.status === 200) {
                     setAdded(true)
                 } else {
-                    setError(true);
+                    setServerError(true)
                 }
             })
     }
@@ -69,6 +70,7 @@ export const TenderForm = (props) => {
         return (
             <div>
                 {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
+                {serverError && <p>Wystąpił błąd!</p>}
 
                 <h1>Formularz dodawania przetargu</h1>
 
