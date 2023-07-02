@@ -23,6 +23,11 @@ export const AddedSuccessful = () => {
             <p>Pomyślnie dodano przetarg!</p>
         )
     }
+    else if (state==="offer"){
+        return(
+            <p>Pomyślnie dodano ofertę do przetargu!</p>
+        )
+    }
     else{
         return(
             <p>Pomyślnie dodano!</p>
