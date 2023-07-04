@@ -100,7 +100,7 @@ export const TenderForm = (props) => {
                     </label>
                     <br/>
 
-                    <label>Instytuacja zamawiająca:{' '}
+                    <label>Instytucja zamawiająca:{' '}
                         <select name="ca">
                             <option value={-1}>--Wybierz instytucję--</option>
                             {institutions.map((institution) =>
