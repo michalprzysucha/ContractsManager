@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
+import TimeLeft from "./TimeLeft";
 
 const TenderDetails = () => {
     const [tender, setTender] = useState(null);
@@ -37,6 +38,9 @@ const TenderDetails = () => {
                 <></>
             }
             <p><b>Maksymalny budżet zamawiającego: </b>{tender.budget.toFixed(2)} zł</p>
+
+            {now.toLocaleDateString("pl")===new Date(tender.endDate).toLocaleDateString("pl") && <TimeLeft value={tender.endDate}/>}
+
             {tender.offers ?
                 <>
                     <h2>Tabela ofert</h2>

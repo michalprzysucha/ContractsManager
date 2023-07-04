@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import DateAndTime from "./DateAndTime";
 
 function Menu(){
     return(
@@ -12,6 +13,7 @@ function Menu(){
                     <li><Link to="/ca/add">Dodaj instytucję publiczną</Link></li>
                 </ul>
             </nav>
+            <DateAndTime />
         </>
     );
 }
