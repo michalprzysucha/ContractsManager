@@ -15,6 +15,8 @@ router.get('/add', tenderController.getTenderCreationForm);
 /* GET tender details */
 router.get('/:id', tenderController.getTenderDetails);
 
+router.get('/top-active', tenderController.getTopActiveTenders);
+
 /* POST request for creating new tender. */
 router.post('/add', tenderController.postTender);
 

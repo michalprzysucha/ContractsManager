@@ -5,6 +5,12 @@
 const tenderService = require('../services/tenderService');
 const caService = require('../services/contractingAuthorityService');
 
+const getTopActiveTenders = async(req,res) => {
+    console.log("HALO");
+    const tenders =  await tenderService.getClosedTenders();
+    res.json(tenders);
+}
+
 const getActiveTenders = async(req,res) => {
     const activeTenders =  await tenderService.getActiveTenders();
     res.json(activeTenders);
@@ -13,7 +19,6 @@ const getActiveTenders = async(req,res) => {
 const getClosedTenders = async(req,res) => {
     const closedTenders =  await tenderService.getClosedTenders();
     res.json(closedTenders);
-
 }
 
 const getTenderDetails = async(req,res) => {
@@ -49,6 +54,7 @@ const postTender = async(req,res) => {
 }
 
 module.exports = {
+    getTopActiveTenders,
     getActiveTenders,
     getClosedTenders,
     getTenderDetails,

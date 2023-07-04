@@ -7,6 +7,19 @@ const Offer = db.offer;
 
 const Op = db.Sequelize.Op;
 
+// Jakim cudem to nie dziala?
+const topActiveTenders = () => {
+    let attributes = ["id", "name", "startDate", "endDate"];
+
+    return Tender.findAll({ attributes: attributes })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err.message
+        });
+};
+
 const activeTenders = () => {
     const now = new Date();
 
@@ -86,6 +99,7 @@ const addTender = (tender) => {
 };
 
 module.exports = {
+    topActiveTenders,
     activeTenders,
     closedTenders,
     tenderDetails,

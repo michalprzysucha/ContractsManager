@@ -4,6 +4,10 @@
 
 const daoTender = require('../data_objects/daoTender');
 
+const getTopActiveTenders = async() => {
+    return await daoTender.topActiveTenders();
+}
+
 const getActiveTenders = async () => {
     return await daoTender.activeTenders();
 }
@@ -21,6 +25,7 @@ const postTender = async(tender) => {
 }
 
 module.exports = {
+    getTopActiveTenders,
     getActiveTenders,
     getClosedTenders,
     getTenderDetails,
