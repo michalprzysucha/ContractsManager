@@ -10,7 +10,7 @@ const TendersTable = () => {
 
   const fetchTenders = async () => {
     try {
-      const response = await fetch('http://localhost:3000/tenders/'); 
+      const response = await fetch('http://localhost:3000/tenders');
       const data = await response.json();
       setTenders(data);
       setLoading(false);
@@ -35,6 +35,7 @@ const TendersTable = () => {
       <table>
         <thead>
           <tr>
+            <th>LP</th>
             <th>Nazwa przetargu</th>
             <th>Data rozpoczęcia</th>
             <th>Data zakończenia</th>
@@ -44,9 +45,9 @@ const TendersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {tenders.map(tender => (
-            // <tr key={tender.id}>
-            <tr>
+          {tenders.map((tender, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
               <td>{tender.name}</td>
               <td>{new Date(tender.startDate).toLocaleDateString("pl")} {new Date(tender.startDate).toLocaleTimeString("pl")}</td>
               <td>{new Date(tender.endDate).toLocaleDateString("pl")} {new Date(tender.endDate).toLocaleTimeString("pl")}</td>

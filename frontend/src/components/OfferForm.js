@@ -6,17 +6,19 @@ export const OfferForm = (props) => {
     const [serverError, setServerError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [added, setAdded] = useState(false);
+    const [institutions, setInstitutions] = useState('');
     const date = new Date();
 
 
     useEffect(() => {
         document.title='Dodaj ofertę do przetargu';
 
-        fetch('http://localhost:3000/tenders/id/add')   //check the correct url!!!
+        fetch('http://localhost:3000/ca/list')
             .then(res => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
+                    setInstitutions(result);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -47,7 +49,7 @@ export const OfferForm = (props) => {
             )
         }
 
-        fetch('http://localhost:3000/tenders/id/add', requestOptions)   //path to be chceked!!
+        fetch('http://localhost:3000/tenders/add', requestOptions)   //path to be chceked!!
             .then((response)=> {
                 if (response.status === 200) {
                     setAdded(true)

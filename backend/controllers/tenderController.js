@@ -7,12 +7,12 @@ const caService = require('../services/contractingAuthorityService');
 
 const getActiveTenders = async(req,res) => {
     const activeTenders =  await tenderService.getActiveTenders();
-    res.render("tendersTable", {title: "Aktywne przetargi", tenders: activeTenders})
+    res.json(activeTenders);
 }
 
 const getClosedTenders = async(req,res) => {
     const closedTenders =  await tenderService.getClosedTenders();
-    res.render("tendersTable", {title: "Zakończone przetargi", tenders: closedTenders})
+    res.json(closedTenders);
 
 }
 

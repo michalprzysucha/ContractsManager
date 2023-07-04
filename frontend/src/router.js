@@ -7,7 +7,7 @@ import {AddedSuccessful} from "./components/AddedSuccessful";
 import {TenderForm} from "./components/TenderForm";
 import TenderDetails from "./components/TenderDetails";
 import TendersTable from "./components/TendersTable";
-import OfferForm from "./components/OfferForm";
+import {OfferForm} from "./components/OfferForm";
 
 function Router(){
     return (
@@ -20,12 +20,13 @@ function Router(){
                 <Route path="ca">
                     <Route path="add" element={<ClientForm value={"institution"}/>} />
                 </Route>
-                <Route path="tenders">
-                    <Route path="add" element={<TenderForm value={"tender"}/>} />
-                    {/* OfferForm ściezka do sprawdzeniea */}
-                    <Route path="offer/add" element={<OfferForm value={"offer"}/>} /> 
+                <Route path="tenders" >
+                    <Route index element={<TendersTable />} />
                     <Route path=":id" element={<TenderDetails/>} />
-                    <Route path="/" element={<TendersTable/>} />
+                    <Route path="add" element={<TenderForm value={"tender"}/>} />
+                </Route>
+                <Route path="offers">
+                    <Route path="add/:tenderId" element={<OfferForm value={"offer"}/>} />
                 </Route>
                 <Route path="/addedSuccessful" element={<AddedSuccessful/>}/>
                 <Route path="*" element={<NotFound />} />
