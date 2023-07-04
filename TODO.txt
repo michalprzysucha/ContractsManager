@@ -6,7 +6,7 @@
 	- przycisk złóż ofertę w przetargu jest na samym dole strony, powinno coś pod nim jeszcze być (tzn. jakaś pusta przestrzeń)
 - formularze:
 	- co robić z błędami po fetch (na razie jest sprawdzany responseStatus, ale jakie errory wypisywać, jak je w ogóle przekazać z serwera)
-	- dodać zabezpieczenie przed wstawianiem pustych danych
+	- dodać zabezpieczenie przed wstawianiem pustych danych (i przed dodaniem dwa razy np. tej samej firmy czy instytycji)
 - OfferForm - do zrobienia (np. pierwszy url powinnien ściągać firmy, instytucje, bo to firmy składają oferty)
 
 Kosmetyczne zmiany:
