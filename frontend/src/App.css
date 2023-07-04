@@ -33,6 +33,19 @@ table {
   border-spacing: 40px 15px;
 }
 
+#summaries_wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary_box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
