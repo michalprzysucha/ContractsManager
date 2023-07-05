@@ -43,6 +43,35 @@ const topActiveTenders = () => {
         });
 };
 
+const expiringTenders = () => {
+    const now = new Date();
+    const daysThreshold = new Date();
+    daysThreshold.setDate(now.getDate() + 3);
+
+    let attributes = ["id", "name", "endDate"];
+    let condition = {
+        startDate: {
+            [Op.lte]: now
+        },
+        [Op.and]: [
+            { endDate: {
+                [Op.gt]: now
+            }},
+            { endDate: {
+                [Op.lte]: daysThreshold
+                }}
+        ]
+    }
+
+    return Tender.findAll({ attributes: attributes, where: condition })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err.message
+        });
+};
+
 const activeTenders = () => {
     const now = new Date();
 
@@ -123,6 +152,7 @@ const addTender = (tender) => {
 
 module.exports = {
     topActiveTenders,
+    expiringTenders,
     activeTenders,
     closedTenders,
     tenderDetails,

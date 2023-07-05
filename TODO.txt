@@ -1,5 +1,7 @@
 - przetargi które się jeszcze nie zaczeły nie są chyba nigdzie wypisywane
 - nie da się na razie prześć do szczegółów przetargu o ile nie zna się odpowiedniego url
+- zakończone przetargi:
+    - trzeba odpytywać URL: .../tenders/closed, bo tam są zwracane zakończone przetargi; .../tenders zwracają tylko aktywne przetargi
 - w szczegółach przetargu: 
 	- jeśli przetarg się jeszcze nie zakończył to nie powinniśmy raczej wypisywać złożonych ofert, one powinny się dopiero wyświetlać po zakończeniu przetargu
 	- to czy przetarg się przypadkiem już nie zakończył nie jest sprawdzane w czasie rzeczywistym (na początku jest ustawiana data now, ona powinna podlegać aktualizacji co jakiś czas)
@@ -8,6 +10,7 @@
 	- co robić z błędami po fetch (na razie jest sprawdzany responseStatus, ale jakie errory wypisywać, jak je w ogóle przekazać z serwera)
 	- dodać zabezpieczenie przed wstawianiem pustych danych (i przed dodaniem dwa razy np. tej samej firmy czy instytycji)
 - OfferForm - do zrobienia (np. pierwszy url powinnien ściągać firmy, instytucje, bo to firmy składają oferty)
+- TimeLeft - nie pokazuje dni do zakończenia przetargu jeżeli do zakończenia mamy więcej niż 24 godziny; może można dodawać dni do godzin jako +24h
 
 Kosmetyczne zmiany:
 - ujednolicić componenty (raz jest jako funkcja, raz const lambda, raz export default, raz export const )

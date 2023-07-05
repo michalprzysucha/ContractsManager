@@ -15,6 +15,9 @@ router.get('/add', tenderController.getTenderCreationForm);
 /* GET top active tenders */
 router.get('/top-active', tenderController.getTopActiveTenders);
 
+/* GET expiring tenders */
+router.get('/expiring', tenderController.getExpiringTenders);
+
 /* GET tender details */
 router.get('/:id', tenderController.getTenderDetails);
 
