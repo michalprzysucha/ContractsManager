@@ -6,8 +6,7 @@ const tenderService = require('../services/tenderService');
 const caService = require('../services/contractingAuthorityService');
 
 const getTopActiveTenders = async(req,res) => {
-    console.log("HALO");
-    const tenders =  await tenderService.getClosedTenders();
+    const tenders =  await tenderService.getTopActiveTenders();
     res.json(tenders);
 }
 

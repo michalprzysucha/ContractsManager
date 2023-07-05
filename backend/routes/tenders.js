@@ -12,10 +12,11 @@ router.get('/closed', tenderController.getClosedTenders);
 /* GET request for creating new tender. */
 router.get('/add', tenderController.getTenderCreationForm);
 
+/* GET top active tenders */
+router.get('/top-active', tenderController.getTopActiveTenders);
+
 /* GET tender details */
 router.get('/:id', tenderController.getTenderDetails);
-
-router.get('/top-active', tenderController.getTopActiveTenders);
 
 /* POST request for creating new tender. */
 router.post('/add', tenderController.postTender);

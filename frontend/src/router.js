@@ -22,8 +22,8 @@ function Router(){
                 </Route>
                 <Route path="tenders" >
                     <Route index element={<TendersTable />} />
-                    <Route path=":id" element={<TenderDetails/>} />
                     <Route path="add" element={<TenderForm value={"tender"}/>} />
+                    <Route path=":id" element={<TenderDetails/>} />
                 </Route>
                 <Route path="offers">
                     <Route path="add/:tenderId" element={<OfferForm value={"offer"}/>} />

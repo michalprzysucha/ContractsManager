@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
 
 const MostActiveTenders = () => {
     const [tenders, setTenders] = useState(null);
@@ -9,8 +10,7 @@ const MostActiveTenders = () => {
 
     const getTopActiveTenders = async() => {
         const response = await fetch(`http://localhost:3000/tenders/top-active`);
-        const temp = await response.json();
-        setTenders(temp);
+        setTenders(await response.json());
     }
 
     if (!tenders) {
@@ -19,17 +19,13 @@ const MostActiveTenders = () => {
 
     return (
         <>
-            <p>{tenders}</p>
-            {/*{tenders.map((tender, index) => {*/}
-            {/*    return (*/}
-            {/*        <tr key={index}>*/}
-            {/*            <td>{index + 1}</td>*/}
-            {/*            <td>{company.name}</td>*/}
-            {/*            <td>{formattedSubmissionDate}</td>*/}
-            {/*            <td>{price.toFixed(2)} zł</td>*/}
-            {/*        </tr>*/}
-            {/*    );*/}
-            {/*})}*/}
+            <ul>
+                {tenders.map((tender, index) => (
+                    <li key={index}>
+                        <Link to={`/tenders/${tender.id}`}> {tender.name} </Link>
+                    </li>
+                ))}
+            </ul>
         </>
     );
 }

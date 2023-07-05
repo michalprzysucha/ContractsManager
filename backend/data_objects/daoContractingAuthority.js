@@ -1,6 +1,6 @@
-const db = require("../models/sequelizeConfig");
+const dbConfig = require("../models/sequelizeConfig");
 
-const ContractingAuthority = db.contractingAuthority;
+const ContractingAuthority = dbConfig.db.contractingAuthority;
 
 const addCa = (ca) => {
     return ContractingAuthority.create(ca)

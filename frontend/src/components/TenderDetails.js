@@ -14,8 +14,7 @@ const TenderDetails = () => {
 
     const getTenderDetails = async() => {
         const response = await fetch(`http://localhost:3000/tenders/${id}`);
-        const temp = await response.json();
-        setTender(temp[0]);
+        setTender(await response.json());
     }
 
     if (!tender) {

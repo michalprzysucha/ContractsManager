@@ -1,17 +1,40 @@
-const db = require("../models/sequelizeConfig");
+const dbConfig = require("../models/sequelizeConfig");
 
-const Tender = db.tender;
-const Company = db.company;
-const ContractingAuthority = db.contractingAuthority;
-const Offer = db.offer;
+const Tender = dbConfig.db.tender;
+const Company = dbConfig.db.company;
+const ContractingAuthority = dbConfig.db.contractingAuthority;
+const Offer = dbConfig.db.offer;
 
-const Op = db.Sequelize.Op;
+const Op = dbConfig.db.Sequelize.Op;
 
-// Jakim cudem to nie dziala?
 const topActiveTenders = () => {
-    let attributes = ["id", "name", "startDate", "endDate"];
+    const now = new Date();
+    let condition = {
+        startDate: {
+            [Op.lte]: now
+        },
+        endDate: {
+            [Op.gt]: now
+        }
+    }
 
-    return Tender.findAll({ attributes: attributes })
+    let options = {
+        attributes: ['Tender.id', 'Tender.name', [dbConfig.sequelize.fn('COUNT', 'Offer.id'), 'offers_count']],
+        include: [
+            {
+                model: Tender,
+                attributes: [],
+                include: [],
+                where: condition
+            }
+        ],
+        group: ['Tender.id'],
+        order: [[dbConfig.sequelize.literal('offers_count'), 'DESC']],
+        limit: 5,
+        raw: true
+    }
+
+    return Offer.findAll(options)
         .then(data => {
             return data;
         })
@@ -79,7 +102,7 @@ const tenderDetails = (id) => {
         order: [[Offer, 'price', 'ASC']]
     }
 
-    return Tender.findAll(options)
+    return Tender.findOne(options)  // findOne?
         .then(data => {
             return data;
         })

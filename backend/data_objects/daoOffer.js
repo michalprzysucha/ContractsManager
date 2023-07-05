@@ -1,6 +1,6 @@
-const db = require("../models/sequelizeConfig");
+const dbConfig = require("../models/sequelizeConfig");
 
-const Offer = db.offer;
+const Offer = dbConfig.db.offer;
 
 const addOffer = (offer) => {
     return Offer.create(offer)

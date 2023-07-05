@@ -1,6 +1,6 @@
-const db = require("../models/sequelizeConfig");
+const dbConfig = require("../models/sequelizeConfig");
 
-const Company = db.company;
+const Company = dbConfig.db.company;
 
 const addCompany = (company) => {
     return Company.create(company)

@@ -54,4 +54,7 @@ db.sequelize.sync({force: false}) // false - nienadpisuje struktury bazy
         console.log("Failed to sync db: " + err.message);
     })
 
-module.exports = db;
+module.exports = {
+    db,
+    sequelize
+};
