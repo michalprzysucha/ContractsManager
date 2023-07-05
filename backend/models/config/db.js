@@ -3,7 +3,8 @@ module.exports = {
     PORT: process.env.DB_PORT,
     USER: process.env.DB_USER,
     PASSWORD: process.env.DB_PASS,
-    DB: process.env.DB_NAME,
+    // DB: process.env.DB_NAME,    //just changes for my connection to work
+    DB: "pai_przetargi",
     dialect: "mysql",
     pool: {
         max: 5,

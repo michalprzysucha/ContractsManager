@@ -1,0 +1,8 @@
+# Server port
+PORT=3000
+# Database configuration
+DB_HOST="localhost"
+DB_USER="root"
+DB_PASS="root"
+DB_NAME="pai_przetargi"
+DB_PORT=3306
