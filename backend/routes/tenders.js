@@ -18,6 +18,9 @@ router.get('/top-active', tenderController.getTopActiveTenders);
 /* GET expiring tenders */
 router.get('/expiring', tenderController.getExpiringTenders);
 
+/* GET tenders with the biggest budget */
+router.get('/top-budget', tenderController.getTopBudgetTenders);
+
 /* GET tender details */
 router.get('/:id', tenderController.getTenderDetails);
 

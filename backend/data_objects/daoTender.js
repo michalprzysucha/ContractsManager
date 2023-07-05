@@ -60,10 +60,27 @@ const expiringTenders = () => {
             { endDate: {
                 [Op.lte]: daysThreshold
                 }}
-        ]
+        ],
     }
 
     return Tender.findAll({ attributes: attributes, where: condition })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err.message
+        });
+};
+
+const topBudgetTenders = () => {
+    let attributes = ["id", "name", "budget"];
+    let options = {
+        attributes: attributes,
+        order: [["budget", "DESC"]],
+        limit: 5
+    }
+
+    return Tender.findAll(options)
         .then(data => {
             return data;
         })
@@ -153,6 +170,7 @@ const addTender = (tender) => {
 module.exports = {
     topActiveTenders,
     expiringTenders,
+    topBudgetTenders,
     activeTenders,
     closedTenders,
     tenderDetails,

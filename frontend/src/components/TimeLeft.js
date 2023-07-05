@@ -10,7 +10,7 @@ const TimeLeft = (props) => {
     });
 
     return (
-        <p>Przetarg niebawem się zakończy. Pozostało czasu: {date}</p>
+        <>Pozostało czasu: {date}</>
     );
 }
 
