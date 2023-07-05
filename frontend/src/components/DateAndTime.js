@@ -4,14 +4,13 @@ const DateAndTime = () => {
     const [date, setDate] = useState(new Date());
 
     useEffect(() => {
-        const intervalID = setInterval(() => setDate(new Date()), 250);
+        const intervalID = setInterval(() => setDate(new Date()), 100);
         return () => clearInterval(intervalID);
     });
 
     return (
         <div>
-            <p>Aktualna data: {date.toLocaleDateString("pl")}</p>
-            <p>Aktualny czas: {date.toLocaleTimeString("pl")}</p>
+            <p>Aktualna data i czas: {date.toLocaleDateString("pl")} {date.toLocaleTimeString("pl")}</p>
         </div>
     );
 }
