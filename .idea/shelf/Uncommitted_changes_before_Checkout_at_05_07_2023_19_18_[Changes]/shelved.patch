@@ -1,0 +1,126 @@
+Index: backend/routes/tenders.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>var express = require('express');\r\nvar router = express.Router();\r\n\r\nconst tenderController = require('../controllers/tenderController');\r\n\r\n/* GET active tenders listing. */\r\nrouter.get('/', tenderController.getActiveTenders);\r\n\r\n/* GET closed tenders listing. */\r\nrouter.get('/closed', tenderController.getClosedTenders);\r\n\r\n/* GET request for creating new tender. */\r\nrouter.get('/add', tenderController.getTenderCreationForm);\r\n\r\n/* GET top active tenders */\r\nrouter.get('/top-active', tenderController.getTopActiveTenders);\r\n\r\n/* GET tender details */\r\nrouter.get('/:id', tenderController.getTenderDetails);\r\n\r\n/* POST request for creating new tender. */\r\nrouter.post('/add', tenderController.postTender);\r\n\r\nmodule.exports = router;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/routes/tenders.js b/backend/routes/tenders.js
+--- a/backend/routes/tenders.js	(revision 0093aaf4349793aedf1189131e5128515f3c5177)
++++ b/backend/routes/tenders.js	(date 1688577489553)
+@@ -15,6 +15,9 @@
+ /* GET top active tenders */
+ router.get('/top-active', tenderController.getTopActiveTenders);
+ 
++/* GET expiring tenders */
++router.get('/expiring', tenderController.getExpiringTenders);
++
+ /* GET tender details */
+ router.get('/:id', tenderController.getTenderDetails);
+ 
+Index: backend/data_objects/daoTender.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const dbConfig = require(\"../models/sequelizeConfig\");\r\n\r\nconst Tender = dbConfig.db.tender;\r\nconst Company = dbConfig.db.company;\r\nconst ContractingAuthority = dbConfig.db.contractingAuthority;\r\nconst Offer = dbConfig.db.offer;\r\n\r\nconst Op = dbConfig.db.Sequelize.Op;\r\n\r\nconst topActiveTenders = () => {\r\n    const now = new Date();\r\n    let condition = {\r\n        startDate: {\r\n            [Op.lte]: now\r\n        },\r\n        endDate: {\r\n            [Op.gt]: now\r\n        }\r\n    }\r\n\r\n    let options = {\r\n        attributes: ['Tender.id', 'Tender.name', [dbConfig.sequelize.fn('COUNT', 'Offer.id'), 'offers_count']],\r\n        include: [\r\n            {\r\n                model: Tender,\r\n                attributes: [],\r\n                include: [],\r\n                where: condition\r\n            }\r\n        ],\r\n        group: ['Tender.id'],\r\n        order: [[dbConfig.sequelize.literal('offers_count'), 'DESC']],\r\n        limit: 5,\r\n        raw: true\r\n    }\r\n\r\n    return Offer.findAll(options)\r\n        .then(data => {\r\n            return data;\r\n        })\r\n        .catch(err => {\r\n            return err.message\r\n        });\r\n};\r\n\r\nconst activeTenders = () => {\r\n    const now = new Date();\r\n\r\n    let attributes = [\"id\", \"name\", \"startDate\", \"endDate\"];\r\n    let condition = {\r\n        startDate: {\r\n            [Op.lte]: now\r\n        },\r\n        endDate: {\r\n            [Op.gt]: now\r\n        }\r\n    }\r\n\r\n    return Tender.findAll({ attributes: attributes, where: condition })\r\n        .then(data => {\r\n            return data;\r\n        })\r\n        .catch(err => {\r\n            return err.message\r\n        });\r\n};\r\n\r\nconst closedTenders = () => {\r\n    const now = new Date();\r\n\r\n    let attributes = [\"id\", \"name\"];\r\n    let condition = {\r\n        endDate: {\r\n            [Op.lte]: now\r\n        }\r\n    }\r\n\r\n    return Tender.findAll({ attributes: attributes, where: condition })\r\n        .then(data => {\r\n            return data;\r\n        })\r\n        .catch(err => {\r\n            return err.message\r\n        });\r\n};\r\n\r\nconst tenderDetails = (id) => {\r\n    let condition = {\r\n        id: id\r\n    }\r\n\r\n    let options = {\r\n        include: [\r\n            { model: ContractingAuthority },\r\n            {\r\n                model: Offer,\r\n                as: \"offers\",\r\n                include: Company\r\n            }\r\n        ],\r\n        where: condition,\r\n        order: [[Offer, 'price', 'ASC']]\r\n    }\r\n\r\n    return Tender.findOne(options)  // findOne?\r\n        .then(data => {\r\n            return data;\r\n        })\r\n        .catch(err => {\r\n            return err.message\r\n        });\r\n};\r\n\r\nconst addTender = (tender) => {\r\n    return Tender.create(tender)\r\n        .then(() => {\r\n            return 1;\r\n        })\r\n        .catch(err => {\r\n            return err.message\r\n        });\r\n};\r\n\r\nmodule.exports = {\r\n    topActiveTenders,\r\n    activeTenders,\r\n    closedTenders,\r\n    tenderDetails,\r\n    addTender\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/data_objects/daoTender.js b/backend/data_objects/daoTender.js
+--- a/backend/data_objects/daoTender.js	(revision 0093aaf4349793aedf1189131e5128515f3c5177)
++++ b/backend/data_objects/daoTender.js	(date 1688577489577)
+@@ -43,6 +43,28 @@
+         });
+ };
+ 
++const expiringTenders = () => {
++    const now = new Date();
++
++    let attributes = ["id", "name"];
++    let condition = {
++        startDate: {
++            [Op.lte]: now
++        },
++        endDate: {
++            [Op.gt]: now
++        }
++    }
++
++    return Tender.findAll({ attributes: attributes, where: condition })
++        .then(data => {
++            return data;
++        })
++        .catch(err => {
++            return err.message
++        });
++};
++
+ const activeTenders = () => {
+     const now = new Date();
+ 
+@@ -123,6 +145,7 @@
+ 
+ module.exports = {
+     topActiveTenders,
++    expiringTenders,
+     activeTenders,
+     closedTenders,
+     tenderDetails,
+Index: backend/services/tenderService.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n    Tender Service\r\n */\r\n\r\nconst daoTender = require('../data_objects/daoTender');\r\n\r\nconst getTopActiveTenders = async() => {\r\n    return await daoTender.topActiveTenders();\r\n}\r\n\r\nconst getActiveTenders = async () => {\r\n    return await daoTender.activeTenders();\r\n}\r\n\r\nconst getClosedTenders = async() => {\r\n    return await daoTender.closedTenders();\r\n}\r\n\r\nconst getTenderDetails = async(id) => {\r\n    return await daoTender.tenderDetails(id);\r\n}\r\n\r\nconst postTender = async(tender) => {\r\n    return await daoTender.addTender(tender);\r\n}\r\n\r\nmodule.exports = {\r\n    getTopActiveTenders,\r\n    getActiveTenders,\r\n    getClosedTenders,\r\n    getTenderDetails,\r\n    postTender\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/services/tenderService.js b/backend/services/tenderService.js
+--- a/backend/services/tenderService.js	(revision 0093aaf4349793aedf1189131e5128515f3c5177)
++++ b/backend/services/tenderService.js	(date 1688577489588)
+@@ -8,6 +8,10 @@
+     return await daoTender.topActiveTenders();
+ }
+ 
++const getExpiringTenders = async() => {
++    return await daoTender.expiringTenders();
++}
++
+ const getActiveTenders = async () => {
+     return await daoTender.activeTenders();
+ }
+@@ -26,6 +30,7 @@
+ 
+ module.exports = {
+     getTopActiveTenders,
++    getExpiringTenders,
+     getActiveTenders,
+     getClosedTenders,
+     getTenderDetails,
+Index: backend/controllers/tenderController.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n    Tender Controller\r\n */\r\n\r\nconst tenderService = require('../services/tenderService');\r\nconst caService = require('../services/contractingAuthorityService');\r\n\r\nconst getTopActiveTenders = async(req,res) => {\r\n    const tenders =  await tenderService.getTopActiveTenders();\r\n    res.json(tenders);\r\n}\r\n\r\nconst getActiveTenders = async(req,res) => {\r\n    const activeTenders =  await tenderService.getActiveTenders();\r\n    res.json(activeTenders);\r\n}\r\n\r\nconst getClosedTenders = async(req,res) => {\r\n    const closedTenders =  await tenderService.getClosedTenders();\r\n    res.json(closedTenders);\r\n}\r\n\r\nconst getTenderDetails = async(req,res) => {\r\n    const tender =  await tenderService.getTenderDetails(req.params.id);\r\n    res.json(tender);\r\n}\r\n\r\nconst getTenderCreationForm = async(req,res) => {\r\n    const contractingAuthorities = await caService.getCa();\r\n    res.render(\"tenderForm\", {ca: contractingAuthorities, success: 0})\r\n}\r\n\r\nconst postTender = async(req,res) => {\r\n    const contractingAuthorities = await caService.getCa();\r\n    const tender = {\r\n        name: req.body.tender_name,\r\n        startDate: req.body.start_date,\r\n        endDate: req.body.end_date,\r\n        description: req.body.description,\r\n        budget: req.body.budget,\r\n        contractingAuthorityId: req.body.ca\r\n    };\r\n\r\n    let result = await tenderService.postTender(tender);\r\n\r\n    if(result===1) {\r\n        res.sendStatus(200)\r\n    }\r\n    else{\r\n        console.log(result)\r\n        res.sendStatus(400)\r\n    }\r\n}\r\n\r\nmodule.exports = {\r\n    getTopActiveTenders,\r\n    getActiveTenders,\r\n    getClosedTenders,\r\n    getTenderDetails,\r\n    getTenderCreationForm,\r\n    postTender\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/controllers/tenderController.js b/backend/controllers/tenderController.js
+--- a/backend/controllers/tenderController.js	(revision 0093aaf4349793aedf1189131e5128515f3c5177)
++++ b/backend/controllers/tenderController.js	(date 1688577489598)
+@@ -10,6 +10,11 @@
+     res.json(tenders);
+ }
+ 
++const getExpiringTenders = async(req,res) => {
++    const tenders =  await tenderService.getExpiringTenders();
++    res.json(tenders);
++}
++
+ const getActiveTenders = async(req,res) => {
+     const activeTenders =  await tenderService.getActiveTenders();
+     res.json(activeTenders);
+@@ -54,6 +59,7 @@
+ 
+ module.exports = {
+     getTopActiveTenders,
++    getExpiringTenders,
+     getActiveTenders,
+     getClosedTenders,
+     getTenderDetails,
