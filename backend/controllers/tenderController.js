@@ -15,6 +15,11 @@ const getExpiringTenders = async(req,res) => {
     res.json(tenders);
 }
 
+const getTopBudgetTenders = async(req,res) => {
+    const tenders =  await tenderService.getTopBudgetTenders();
+    res.json(tenders);
+}
+
 const getActiveTenders = async(req,res) => {
     const activeTenders =  await tenderService.getActiveTenders();
     res.json(activeTenders);
@@ -59,6 +64,7 @@ const postTender = async(req,res) => {
 
 module.exports = {
     getTopActiveTenders,
+    getTopBudgetTenders,
     getExpiringTenders,
     getActiveTenders,
     getClosedTenders,
