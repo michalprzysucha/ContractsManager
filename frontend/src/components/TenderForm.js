@@ -33,31 +33,50 @@ export const TenderForm = (props) => {
         const form = e.target;
         const formData = new FormData(form);
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-type': "application/json"
-            },
-            body: JSON.stringify(
-                {
-                    tender_name: formData.get("tender_name"),
-                    start_date: formData.get("start_date"),
-                    end_date: formData.get("end_date"),
-                    description: formData.get("description"),
-                    budget: formData.get("budget"),
-                    ca: formData.get("ca")
-                }
-            )
+        const formTenderName = formData.get("tender_name")
+        const formStartDate = formData.get("start_date")
+        const formEndDate = formData.get("end_date")
+        const formBudget = formData.get("budget")
+        const formCA = formData.get("ca")
+        if (/^$|^\s+$/.test(formTenderName)) {
+            alert("Proszę wpisać nazwę!")
         }
+        else if(/^$|^\s+$/.test(formBudget)){
+            alert("Proszę wpisać budżet!")
+        }
+        else if(formStartDate>=formEndDate){
+            alert("Data rozpoczęcia powinna być wcześniejsza od daty zakończenia!")
+        }
+        else if(formCA==="-1"){
+            alert("Proszę wpisać instytucję zamawiającą!")
+        }
+        else {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-type': "application/json"
+                },
+                body: JSON.stringify(
+                    {
+                        tender_name: formTenderName,
+                        start_date: formStartDate,
+                        end_date: formEndDate,
+                        description: formData.get("description"),
+                        budget: formBudget,
+                        ca: formCA
+                    }
+                )
+            }
 
-        fetch('http://localhost:3000/tenders/add', requestOptions)
-            .then((response)=> {
-                if (response.status === 200) {
-                    setAdded(true)
-                } else {
-                    setServerError(true)
-                }
-            })
+            fetch('http://localhost:3000/tenders/add', requestOptions)
+                .then((response) => {
+                    if (response.status === 200) {
+                        setAdded(true)
+                    } else {
+                        setServerError(true)
+                    }
+                })
+        }
     }
 
 

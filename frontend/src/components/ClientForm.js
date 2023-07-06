@@ -16,30 +16,35 @@ export const ClientForm = (props) => {
         const form = e.target;
         const formData = new FormData(form);
 
-        let url;
-        if(props.value==="company") {
-            url='http://localhost:3000/companies/add'
+        const formName = formData.get("name")
+        if (/^$|^\s+$/.test(formName)) {
+            alert("Proszę wpisać nazwę!")
         }
-        else{
-            url='http://localhost:3000/ca/add'
+        else {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-type': "application/json"
+                },
+                body: JSON.stringify({name: formName})
+            };
+
+            let url;
+            if (props.value === "company") {
+                url = 'http://localhost:3000/companies/add'
+            } else {
+                url = 'http://localhost:3000/ca/add'
+            }
+
+            fetch(url, requestOptions)
+                .then((response) => {
+                    if (response.status === 200) {
+                        setAdded(true)
+                    } else {
+                        setServerError(true);
+                    }
+                })
         }
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-type': "application/json"
-            },
-            body: JSON.stringify({ name: formData.get("name")})
-        };
-
-        fetch(url, requestOptions)
-            .then((response)=> {
-                if (response.status === 200) {
-                    setAdded(true)
-                } else {
-                    setServerError(true);
-                }
-            })
     }
 
     return (

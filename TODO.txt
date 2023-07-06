@@ -8,7 +8,7 @@
 	- przycisk złóż ofertę w przetargu jest na samym dole strony, powinno coś pod nim jeszcze być (tzn. jakaś pusta przestrzeń)
 - formularze:
 	- co robić z błędami po fetch (na razie jest sprawdzany responseStatus, ale jakie errory wypisywać, jak je w ogóle przekazać z serwera)
-	- dodać zabezpieczenie przed wstawianiem pustych danych (i przed dodaniem dwa razy np. tej samej firmy czy instytycji)
+	- sprawdzenie danych formularza przed fetch dla OfferForm (w pozostałych takie sprawdzenie jest już przeprowadzane) i przed dodaniem dwa razy np. tej samej firmy czy instytycji we wszystkich formularzach (czyli sprawdzenie może nastąpić dopiero po otrzymaniu odwiedzi z serwera i bazy danych)
 - OfferForm - do zrobienia (np. pierwszy url powinnien ściągać firmy, instytucje, bo to firmy składają oferty)
 - backend otwiera się na porcie 3000, frontend domyślnie też - może ustalić port dla reacta na stałe?
 
