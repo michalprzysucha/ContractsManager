@@ -4,12 +4,14 @@ import TimeLeft from "./TimeLeft";
 
 const TenderDetails = () => {
     const [tender, setTender] = useState(null);
-    const now = new Date();
+    const [now, setNow] = useState(new Date());
     let {id} = useParams();
     let hasOfferWithinBudget = false;
 
     useEffect(() => {
+        const intervalID = setInterval(() => setNow(new Date()), 100);
         getTenderDetails();
+        return () => clearInterval(intervalID);
     }, [id]);
 
     const getTenderDetails = async() => {
