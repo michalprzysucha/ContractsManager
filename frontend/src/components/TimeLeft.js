@@ -10,10 +10,7 @@ const TimeLeft = (props) => {
     });
 
     return (
-        <div>
-            <h4>Do zakończenia przetargu pozostało: </h4>
-            <p>{Math.trunc((dateDiff)/(3600000*24))}:{new Date(dateDiff).toISOString().substring(11,16)} (dni:godzin:minut)</p>
-        </div>
+        <>{Math.trunc((dateDiff)/(3600000*24))}:{new Date(dateDiff).toISOString().substring(11,16)} (dni:godzin:minut)</>
     );
 }
 
