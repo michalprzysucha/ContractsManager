@@ -38,7 +38,7 @@ const TenderDetails = () => {
             }
             <p><b>Maksymalny budżet zamawiającego: </b>{tender.budget.toFixed(2)} zł</p>
 
-            {now.toLocaleDateString("pl")===new Date(tender.endDate).toLocaleDateString("pl") && <TimeLeft value={tender.endDate}/>}
+            {now < new Date(tender.endDate) && <TimeLeft value={tender.endDate}/>}
 
             {tender.offers ?
                 <>
