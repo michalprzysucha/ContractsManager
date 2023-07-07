@@ -1,7 +1,5 @@
 ﻿- przetargi które się jeszcze nie zaczeły nie są chyba nigdzie wypisywane
 - nie da się na razie prześć do szczegółów przetargu o ile nie zna się odpowiedniego url
-- zakończone przetargi:
-    - trzeba odpytywać URL: .../tenders/closed, bo tam są zwracane zakończone przetargi; .../tenders zwracają tylko aktywne przetargi
 - w szczegółach przetargu: 
 	- jeśli przetarg się jeszcze nie zakończył to nie powinniśmy raczej wypisywać złożonych ofert, one powinny się dopiero wyświetlać po zakończeniu przetargu
 	- przycisk złóż ofertę w przetargu jest na samym dole strony, powinno coś pod nim jeszcze być (tzn. jakaś pusta przestrzeń)
@@ -12,8 +10,8 @@
 
 
 Kosmetyczne zmiany:
-- ujednolicić componenty (raz jest jako funkcja, raz const lambda, raz export default, raz export const )
-- ujdnolicić czy w return mamy <div></div> czy puste znaczniki <></>
+- ujednolicić componenty (raz jest jako funkcja, raz const lambda, raz export default, raz export const ) 
+- ujdnolicić czy w return mamy <div></div> czy puste znaczniki <></> - bez niepotrzebnych div'ów!
 - ułożenie divów z podsumowaniami na stronie głównej tak aby się nie przesuwały w zależności od liczby wyświetlanych przetargów
-- src\components\TenderDetails.js
-  Line 13:8:  React Hook useEffect has a missing dependency: 'getTenderDetails'. Either include it or remove the dependency array, (nie wiem czy to będzie zmieniane, u mnie rzuca warningi) 
+
+
