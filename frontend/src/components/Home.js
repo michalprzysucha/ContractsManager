@@ -1,6 +1,4 @@
-import MostActiveTenders from "./MostActiveTenders";
-import ExpiringTenders from "./ExpiringTenders";
-import TopBudgetTenders from "./TopBudgetTenders";
+import TendersSummaries from "./TendersSummaries";
 
 function Home(){
     return(
@@ -9,15 +7,15 @@ function Home(){
             <div id="summaries_wrapper">
                 <div className="summary_box">
                     <h3>Aktywne przetargi z największą liczbą ofert</h3>
-                    <MostActiveTenders />
+                    <TendersSummaries value="top-active"/>
                 </div>
                 <div className="summary_box">
                     <h3>Przetargi bliskie zakończenia</h3>
-                    <ExpiringTenders />
+                    <TendersSummaries value="expiring"/>
                 </div>
                 <div className="summary_box">
                     <h3>Przetargi o największym budżecie</h3>
-                    <TopBudgetTenders />
+                    <TendersSummaries value="top-budget"/>
                 </div>
             </div>
         </>
