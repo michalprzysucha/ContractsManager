@@ -9,9 +9,6 @@ router.get('/', tenderController.getActiveTenders);
 /* GET closed tenders listing. */
 router.get('/closed', tenderController.getClosedTenders);
 
-/* GET request for creating new tender. */
-router.get('/add', tenderController.getTenderCreationForm);
-
 /* GET top active tenders */
 router.get('/top-active', tenderController.getTopActiveTenders);
 

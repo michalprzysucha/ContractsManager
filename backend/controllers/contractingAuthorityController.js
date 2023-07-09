@@ -4,10 +4,6 @@
 
 const caService = require('../services/contractingAuthorityService');
 
-const getCaCreationForm = async(req,res) => {
-    res.render("ContractingAuthorityForm", {success: 0});
-}
-
 const postCa = async(req,res) => {
     const ca = {
         name: req.body.name
@@ -29,7 +25,6 @@ const getCa = async(req,res) => {
 }
 
 module.exports = {
-    getCaCreationForm,
     postCa,
     getCa
 }

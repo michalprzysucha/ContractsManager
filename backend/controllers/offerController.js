@@ -5,11 +5,6 @@
 const offerService = require('../services/offerService');
 const companyService = require("../services/companyService");
 
-const getOfferCreationForm = async(req,res) => {
-    const companies = await companyService.getCompanies();
-    res.render("offerForm", {success: 0, companies: companies});
-}
-
 const postOffer = async(req,res) => {
     const companies = await companyService.getCompanies();
     const offer = {
@@ -24,6 +19,5 @@ const postOffer = async(req,res) => {
 }
 
 module.exports = {
-    getOfferCreationForm,
     postOffer
 }

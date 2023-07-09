@@ -7,7 +7,6 @@ const logger = require('morgan');
 const dotenv = require('dotenv').config();
 const bodyparser = require('body-parser')
 
-const indexRouter = require('./routes/index');
 const tendersRouter = require('./routes/tenders');
 const companyRouter = require('./routes/companies');
 const contractingAuthorityRouter = require('./routes/contractingAuthorities');
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyparser.urlencoded({extended: true}));
 
-app.use('/', indexRouter);
 app.use('/tenders', tendersRouter);
 app.use('/companies', companyRouter);
 app.use('/ca', contractingAuthorityRouter);
@@ -44,9 +42,7 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;

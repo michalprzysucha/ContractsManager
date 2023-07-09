@@ -4,10 +4,6 @@
 
 const companyService = require('../services/companyService');
 
-const getCompanyCreationForm = async(req,res) => {
-    res.render("companyForm", {success: 0});
-}
-
 const postCompany = async(req,res) => {
     const company = {
         name: req.body.name
@@ -30,7 +26,6 @@ const getComps = async(req,res) => {
 }
 
 module.exports = {
-    getCompanyCreationForm,
     postCompany,
     getComps
 }

@@ -3,7 +3,6 @@
  */
 
 const tenderService = require('../services/tenderService');
-const caService = require('../services/contractingAuthorityService');
 
 const getTopActiveTenders = async(req,res) => {
     const tenders =  await tenderService.getTopActiveTenders();
@@ -35,13 +34,7 @@ const getTenderDetails = async(req,res) => {
     res.json(tender);
 }
 
-const getTenderCreationForm = async(req,res) => {
-    const contractingAuthorities = await caService.getCa();
-    res.render("tenderForm", {ca: contractingAuthorities, success: 0})
-}
-
 const postTender = async(req,res) => {
-    const contractingAuthorities = await caService.getCa();
     const tender = {
         name: req.body.tender_name,
         startDate: req.body.start_date,
@@ -69,6 +62,5 @@ module.exports = {
     getActiveTenders,
     getClosedTenders,
     getTenderDetails,
-    getTenderCreationForm,
     postTender
 }
