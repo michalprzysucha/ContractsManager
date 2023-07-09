@@ -48,7 +48,7 @@ const ClientForm = (props) => {
     }
 
     return (
-        <div>
+        <>
             {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
             {serverError && <p>Wystąpił błąd!</p>}
 
@@ -72,7 +72,7 @@ const ClientForm = (props) => {
                 {' '}
                 <button type="submit">Prześlij</button>
             </form>
-        </div>
+        </>
     )
 }
 

@@ -81,13 +81,13 @@ const TenderForm = (props) => {
 
 
     if(error){
-        return <div>Error: {error.message}</div>
+        return <>Error: {error.message}</>
     } else if (!isLoaded) {
-        return <div>Loading...</div>
+        return <>Loading...</>
     } else {
 
         return (
-            <div>
+            <>
                 {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
                 {serverError && <p>Wystąpił błąd!</p>}
 
@@ -132,7 +132,7 @@ const TenderForm = (props) => {
 
                     <button type="submit">Prześlij</button>
                 </form>
-            </div>
+            </>
         )
     }
 }

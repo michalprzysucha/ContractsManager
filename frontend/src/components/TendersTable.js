@@ -24,7 +24,7 @@ const TendersTable = () => {
 
   const fetchInactiveTenders = async () => {
     try {
-      const response = await fetch('http://localhost:3000/tenders/closed');   
+      const response = await fetch('http://localhost:3000/tenders/closed');
       const data = await response.json();
       setInactiveTenders(data);
       setLoading(false);
@@ -36,11 +36,10 @@ const TendersTable = () => {
 
 
   if (loading) {
-    return <div>Ładowanie...</div>;
+    return <>Ładowanie...</>;
   }
-
   return (
-    <div>
+    <>
       <h1>Przetargi</h1>
       <h2>Aktywne przetargi</h2>
       <table>
@@ -80,7 +79,7 @@ const TendersTable = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 

@@ -60,13 +60,13 @@ const OfferForm = (props) => {
 
 
     if(error){
-        return <div>Error: {error.message}</div>
+        return <>Error: {error.message}</>
     } else if (!isLoaded) {
-        return <div>Ładowanie...</div>
+        return <>Ładowanie...</>
     } else {
 
         return (
-            <div>
+            <>
                 {added && <p><Navigate to="/addedSuccessful" state={props.value}/></p>}
                 {serverError && <p>Wystąpił błąd!</p>}
 
@@ -91,7 +91,7 @@ const OfferForm = (props) => {
 
                     <button type="submit">Prześlij</button>
                 </form>
-            </div>
+            </>
         )
     }
 }

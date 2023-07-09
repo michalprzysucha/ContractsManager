@@ -10,7 +10,6 @@
 
 
 Kosmetyczne zmiany:
-- ujdnolicić czy w return mamy <div></div> czy puste znaczniki <></> - bez niepotrzebnych div'ów!
 - ułożenie divów z podsumowaniami na stronie głównej tak aby się nie przesuwały w zależności od liczby wyświetlanych przetargów
 
 

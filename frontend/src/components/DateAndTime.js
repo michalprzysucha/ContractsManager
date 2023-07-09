@@ -9,9 +9,9 @@ const DateAndTime = () => {
     });
 
     return (
-        <div>
+        <>
             <p>Aktualna data i czas: {date.toLocaleDateString("pl")} {date.toLocaleTimeString("pl")}</p>
-        </div>
+        </>
     );
 }
 
