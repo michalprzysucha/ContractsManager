@@ -27,7 +27,7 @@ const TenderDetails = () => {
     return (
         <>
             <h1>{tender.name}</h1>
-            <p><b>Instytucja zamawiająca: </b> {tender.contractingAuthority.name} </p>
+            <p><b>Instytucja zamawiająca:</b> {tender.contractingAuthority.name} </p>
             <p><b>Data i godzina rozpoczęcia przetargu:</b> {new Date(tender.startDate).toLocaleDateString("pl")} {new Date(tender.startDate).toLocaleTimeString("pl")}</p>
             <p><b>Data i godzina zakończenia przetargu:</b> {new Date(tender.endDate).toLocaleDateString("pl")} {new Date(tender.endDate).toLocaleTimeString("pl")}</p>
             {tender.description ?
@@ -42,20 +42,19 @@ const TenderDetails = () => {
 
             {now < new Date(tender.endDate) &&
                 <>
-                    <h4>Do zakończenia przetargu pozostało:</h4>
-                    <TimeLeft value={tender.endDate}/>
+                    <p><b>Do zakończenia przetargu pozostało:</b> <TimeLeft value={tender.endDate}/></p>
                 </>}
 
             {new Date(tender.startDate) <= now && new Date(tender.endDate) > now ? (
                 <>
-                    <p>Przetarg jest aktywny. Możesz dodać ofertę!</p>
+                    <h4>Przetarg jest aktywny. Możesz dodać ofertę!</h4>
                     <a href={`/offers/add/${tender.id}`}>
                         <button type="button">Dodaj ofertę</button>
                     </a>
                 </>
             ) : (
                 <>
-                    {tender.offers ?
+                    {tender.offers.length !== 0 ?
                         <>
                             <h2>Tabela ofert</h2>
                             <table>
@@ -87,12 +86,12 @@ const TenderDetails = () => {
                             </table>
                         </>
                         :
-                        <p>Brak ofert dla tego przetargu</p>
+                        <h4>Brak ofert dla tego przetargu</h4>
                     }
                     {hasOfferWithinBudget ? (
-                        <p>Przetarg zakończony</p>
+                        <h4>Przetarg zakończony</h4>
                     ) : (
-                        <p>Przetarg zakończony bez roztrzygnięcia</p>
+                        <h4>Przetarg zakończony bez roztrzygnięcia</h4>
                     )}
                 </>
             )}
