@@ -6,19 +6,19 @@ export const OfferForm = (props) => {
     const [serverError, setServerError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [added, setAdded] = useState(false);
-    const [institutions, setInstitutions] = useState('');
+    const [companies, setCompanies] = useState('');
     const date = new Date();
 
 
     useEffect(() => {
         document.title='Dodaj ofertę do przetargu';
 
-        fetch('http://localhost:3000/ca/list')
+        fetch('http://localhost:3000/list_comp')
             .then(res => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setInstitutions(result);
+                    setCompanies();
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -29,7 +29,6 @@ export const OfferForm = (props) => {
 
 
     function handleSubmit(e) {
-        // Prevent the browser from reloading the page
         e.preventDefault();
 
         const form = e.target;
@@ -42,14 +41,14 @@ export const OfferForm = (props) => {
             },
             body: JSON.stringify(
                 {
-                    submission_date: date,
+                    submissionDate: date,
                     price: formData.get("cena"),
-                    
+                    comapny: formData.get("comp")
                 }
             )
         }
 
-        fetch('http://localhost:3000/tenders/add', requestOptions)   //path to be chceked!!
+        fetch('http://localhost:3000/add/:tenderId', requestOptions) 
             .then((response)=> {
                 if (response.status === 200) {
                     setAdded(true)
@@ -79,12 +78,12 @@ export const OfferForm = (props) => {
                     </label>
                     <br/>
 
-                    <label>Instytuacja zamawiająca:{' '}
-                        <select name="ca">
-                            <option value={-1}>--Wybierz instytucję--</option>
-                            {institutions.map((institution) =>
-                                (<option value={institution.id} key={institution.id}>
-                                    {institution.name} &nbsp;
+                    <label>Firma zamawiająca:{' '}
+                        <select name="comp">
+                            <option value={-1}>--Wybierz firmę--</option>
+                            {companies.map((company) =>
+                                (<option value={company.id} key={company.id}>
+                                    {company.name} &nbsp;
                                 </option>))}
                         </select>
                     </label>
