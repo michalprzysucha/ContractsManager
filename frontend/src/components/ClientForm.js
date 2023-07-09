@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Navigate} from "react-router-dom";
 
-export const ClientForm = (props) => {
+const ClientForm = (props) => {
     useEffect(() => {
         document.title='Formularz';
     }, []);
@@ -75,3 +75,5 @@ export const ClientForm = (props) => {
         </div>
     )
 }
+
+export default ClientForm;

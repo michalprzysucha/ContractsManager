@@ -63,7 +63,7 @@ const TendersTable = () => {
           ))}
         </tbody>
       </table>
-      <h2>Niekatywne przetargi</h2>
+      <h2>Nieaktywne przetargi</h2>
       <table>
         <thead>
           <tr>

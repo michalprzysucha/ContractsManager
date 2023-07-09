@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {Navigate} from "react-router-dom";
 
-export const OfferForm = (props) => {
+const OfferForm = (props) => {
     const [error, setError] = useState(null);
     const [serverError, setServerError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -95,3 +95,5 @@ export const OfferForm = (props) => {
         )
     }
 }
+
+export default OfferForm;

@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {Navigate} from "react-router-dom";
 
-export const TenderForm = (props) => {
+const TenderForm = (props) => {
     const [error, setError] = useState(null);
     const [serverError, setServerError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -136,3 +136,5 @@ export const TenderForm = (props) => {
         )
     }
 }
+
+export default TenderForm;

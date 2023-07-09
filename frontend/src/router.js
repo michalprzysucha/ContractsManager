@@ -2,12 +2,12 @@ import {Route, Routes} from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
-import {ClientForm} from "./components/ClientForm";
-import {AddedSuccessful} from "./components/AddedSuccessful";
-import {TenderForm} from "./components/TenderForm";
+import ClientForm from "./components/ClientForm";
+import AddedSuccessful from "./components/AddedSuccessful";
+import TenderForm from "./components/TenderForm";
 import TenderDetails from "./components/TenderDetails";
 import TendersTable from "./components/TendersTable";
-import {OfferForm} from "./components/OfferForm";
+import OfferForm from "./components/OfferForm";
 
 function Router(){
     return (

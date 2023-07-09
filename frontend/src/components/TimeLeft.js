@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 
-
 const TimeLeft = (props) => {
     const [dateDiff, setDateDiff] = useState(new Date(props.value)- new Date());
 

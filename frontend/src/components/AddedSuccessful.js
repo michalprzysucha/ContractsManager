@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import {useEffect} from "react";
 
-export const AddedSuccessful = () => {
+const AddedSuccessful = () => {
     useEffect(() => {
         document.title='Sukces!';
     }, []);
@@ -34,3 +34,5 @@ export const AddedSuccessful = () => {
         )
     }
 }
+
+export default AddedSuccessful;
