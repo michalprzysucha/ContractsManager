@@ -55,7 +55,7 @@ const TendersTable = () => {
           {activeTenders.map((a_tender, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{a_tender.name}</td>
+              <td><a href={`/tenders/${a_tender.id}`}>{a_tender.name}</a></td>
               <td>{new Date(a_tender.startDate).toLocaleDateString("pl")} {new Date(a_tender.startDate).toLocaleTimeString("pl")}</td>
               <td>{new Date(a_tender.endDate).toLocaleDateString("pl")} {new Date(a_tender.endDate).toLocaleTimeString("pl")}</td>
             </tr>
@@ -74,7 +74,7 @@ const TendersTable = () => {
           {inactiveTenders.map((i_tender, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{i_tender.name}</td>
+              <td><a href={`/tenders/${i_tender.id}`}>{i_tender.name}</a></td>
             </tr>
           ))}
         </tbody>
