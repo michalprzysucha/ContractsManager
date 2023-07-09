@@ -1,4 +1,4 @@
-function NotFound(){
+const NotFound = () => {
     return(
         <>
             Strona nie istnieje!

@@ -1,6 +1,6 @@
 import TendersSummaries from "./TendersSummaries";
 
-function Home(){
+const Home = () => {
     return(
         <>
             <h1>Witamy na stronie do zarządzania przetargami</h1>

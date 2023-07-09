@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import DateAndTime from "./DateAndTime";
 
-function Menu(){
+const Menu = () => {
     return(
         <>
             <nav>
