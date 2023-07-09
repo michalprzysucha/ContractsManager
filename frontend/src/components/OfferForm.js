@@ -13,12 +13,12 @@ const OfferForm = (props) => {
     useEffect(() => {
         document.title='Dodaj ofertę do przetargu';
 
-        fetch('http://localhost:3000/list_comp')
+        fetch('http://localhost:3000/companies/list_comp')
             .then(res => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setCompanies();
+                    setCompanies(result);
                 },
                 (error) => {
                     setIsLoaded(true);

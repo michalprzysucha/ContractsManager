@@ -4,7 +4,7 @@ const TimeLeft = (props) => {
     const [dateDiff, setDateDiff] = useState(new Date(props.value)- new Date());
 
     useEffect(() => {
-        const intervalID = setInterval(() => setDateDiff(new Date(props.value)- new Date()), 500);
+        const intervalID = setInterval(() => setDateDiff(new Date(props.value)- new Date()), 100);
         return () => clearInterval(intervalID);
     });
 
