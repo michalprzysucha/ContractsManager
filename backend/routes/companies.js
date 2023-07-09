@@ -9,4 +9,7 @@ router.get('/add', companyController.getCompanyCreationForm);
 /* POST request for creating new company. */
 router.post('/add', companyController.postCompany);
 
+/* GET request for getting all companies. */
+router.get('/list_comp', companyController.getComps);
+
 module.exports = router;

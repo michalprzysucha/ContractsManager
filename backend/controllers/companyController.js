@@ -23,7 +23,14 @@ const postCompany = async(req,res) => {
     }
 }
 
+// adding get companies 
+const getComps = async(req,res) => {
+    const allCompanies= await companyService.getCompanies()
+    res.json(allCompanies)
+}
+
 module.exports = {
     getCompanyCreationForm,
-    postCompany
+    postCompany,
+    getComps
 }
