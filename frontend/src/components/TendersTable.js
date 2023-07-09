@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 const TendersTable = () => {
-  // const [tenders, setTenders] = useState([]);
   const [activeTenders, setActiveTenders] = useState([]);
   const [inactiveTenders, setInactiveTenders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,23 +34,6 @@ const TendersTable = () => {
     }
   };
 
-  // const fetchTenders = async () => {
-  //   try {
-  //     const response = await fetch('http://localhost:3000/tenders');
-  //     const data = await response.json();
-  //     setTenders(data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error('Nastąpił błąd podczas ładowania przetargów:', error);
-  //     setLoading(false);
-  //   }
-  // };
-
-
-  // const getStatusString = (tenderDate) => {
-  //   const currentDate = new Date();
-  //   return currentDate > tenderDate ? 'Wygasł' : 'Aktywny';
-  // };
 
   if (loading) {
     return <div>Ładowanie...</div>;
@@ -68,8 +50,6 @@ const TendersTable = () => {
             <th>Nazwa przetargu</th>
             <th>Data rozpoczęcia</th>
             <th>Data zakończenia</th>
-            <th>Opis</th>
-            <th>Budżet</th>
           </tr>
         </thead>
         <tbody>
@@ -79,8 +59,6 @@ const TendersTable = () => {
               <td>{a_tender.name}</td>
               <td>{new Date(a_tender.startDate).toLocaleDateString("pl")} {new Date(a_tender.startDate).toLocaleTimeString("pl")}</td>
               <td>{new Date(a_tender.endDate).toLocaleDateString("pl")} {new Date(a_tender.endDate).toLocaleTimeString("pl")}</td>
-              <td>{a_tender.description}</td>
-              <td>{a_tender.budget}</td>
             </tr>
           ))}
         </tbody>
@@ -91,10 +69,6 @@ const TendersTable = () => {
           <tr>
             <th>LP</th>
             <th>Nazwa przetargu</th>
-            <th>Data rozpoczęcia</th>
-            <th>Data zakończenia</th>
-            <th>Opis</th>
-            <th>Budżet</th>
           </tr>
         </thead>
         <tbody>
@@ -102,11 +76,6 @@ const TendersTable = () => {
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{i_tender.name}</td>
-              {/* <td>{new Date(i_tender.startDate).toLocaleDateString("pl")} {new Date(i_tender.startDate).toLocaleTimeString("pl")}</td> */}
-              <td>{i_tender.startDate}</td>
-              <td>{new Date(i_tender.endDate).toLocaleDateString("pl")} {new Date(i_tender.endDate).toLocaleTimeString("pl")}</td>
-              <td>{i_tender.description}</td>
-              <td>{i_tender.budget}</td>
             </tr>
           ))}
         </tbody>
