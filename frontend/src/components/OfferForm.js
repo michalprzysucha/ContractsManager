@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {Navigate} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 const OfferForm = (props) => {
     const [error, setError] = useState(null);
@@ -7,6 +8,8 @@ const OfferForm = (props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [added, setAdded] = useState(false);
     const [companies, setCompanies] = useState('');
+    let id = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
+    console.log(id);
     const date = new Date();
 
 
@@ -43,12 +46,12 @@ const OfferForm = (props) => {
                 {
                     submissionDate: date,
                     price: formData.get("cena"),
-                    comapny: formData.get("comp")
+                    company: formData.get("comp")
                 }
             )
         }
 
-        fetch('http://localhost:3000/add/:tenderId', requestOptions) 
+        fetch(`http://localhost:3000/offers/add/${id}`, requestOptions) 
             .then((response)=> {
                 if (response.status === 200) {
                     setAdded(true)

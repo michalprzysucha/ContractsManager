@@ -14,8 +14,16 @@ const postOffer = async(req,res) => {
         tenderId: req.params.tenderId
 };
 
-    let success = await offerService.postOffer(offer);
-    res.render("offerForm", {success: success, companies: companies});
+    let result = await offerService.postOffer(offer);
+
+    if(result===1) {
+        res.sendStatus(200)
+    }
+    else{
+        console.log(result)
+        res.sendStatus(400)
+    }
+    // res.render("offerForm", {success: success, companies: companies});
 }
 
 module.exports = {
