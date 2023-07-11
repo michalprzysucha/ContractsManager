@@ -63,19 +63,28 @@ Podstawowymi komponentami aplikacji są:
 TenderForm: na początku z serwera pobierana jest lista dostępnych instytucji publicznych przy pomocy asynchronicznego modelu komunikacji fetch API. Następnie generowane jest formularz, który po wypełnieniu wysyłany jest metodą POST pod konkretny URL. Przed przesłaniem danych wykonywana jest weryfikacja wpisanych wartości. 
 
 TendersTable: na początku z serwera pobierana jest lista dostępnych aktywnych oraz zakończonych przetargów. Selekcja aktywnych i zakończonych przetargów dokonywana jest po stronie back-endu przy użyciu odpowiedniego warunku w zapytaniu Sequalize. 
-(kod z dao)
+
+| ![aktywne_przetargi](https://github.com/michalprzysucha/PAI_projekt_grupowy/assets/64420379/050093cd-85e9-41b2-892e-91e8a14ebee2) |
+|:--:| 
+| *Funkcja activeTenders z pliku daoTender.js* |
 
 TenderDetails: pobiera i wyświetla dane i przetargu. W zależności od tego, czy przetarg jest aktywny czy nie wyświetlana jest odpowiednio przycisk umożliwiający złożenie nowej oferty albo lista złożonych ofert. Dodatkowo, przy aktywnych przetargach, wyświetlany jest czas do ich zakończenia.
 
 OfferForm: komponent związany jest bezpośrednio z komponentem TenderDetails. Jest on wyświetlany po naciśnięciu przycisku złożenia oferty. Na początku komponent pobiera listę dostępnych firm, które będzie można wybrać w formularzu.
-(kod z zapytania sequalize, use effect) 
+
+| ![formularz_oferty](https://github.com/michalprzysucha/PAI_projekt_grupowy/assets/64420379/344a7c8f-9a40-4f3e-a505-4c03b5c5028a) |
+|:--:| 
+| *Fragment pliku OfferForm.js* |
 
 Menu jest częścią komponentu Layout. Dzięki zastosowaniu Outletu jest ono widoczne na każdej stronie co w znaczący sposób ułatwia nawigację po aplikacji.
 
 Za trasowanie żądań odpowiada plik router.js.
 
 Komponentem rozszerzającym podstawowe funkcjonalności aplikacji jest strona główna (Home.js), który zawiera podsumowania dotyczące najbardziej aktywnych przetargów, przetargów z największym budżetem i przetargi bliskie zakończeniu. 
-(tenders summaries)
+
+| ![podsumowania](https://github.com/michalprzysucha/PAI_projekt_grupowy/assets/64420379/05455cbf-2777-4a83-a5d2-046c517cf8d1) |
+|:--:| 
+| *Fragment pliku TendersSummaries.js* |
 
 ## Podsumowanie
 W wyniku pracy nad produktem udało się stworzyć aplikację do zarządzania przetargami, oferująca podstawowe funkcjonalności. W przyszłości możliwy jest dalszy rozwój aplikacji pod kątem interfejsu użytkownika oraz autoryzacji. Przetargi mogłyby definiować tylko zarejestrowane instytucje, a uczestniczyć w nich tylko zautoryzowane firmy. Aplikacja zostałaby rozbudowana o zarządzanie kontem użytkownika i pozwalająca na wgląd w historię aktywności w aplikacji. Wymagałoby to rozszerzenia modelu danych o dodatkowe encje i atrybuty.
