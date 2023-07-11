@@ -130,6 +130,25 @@ const closedTenders = () => {
         });
 };
 
+const inactiveTenders = () => {
+    const now = new Date();
+
+    let attributes = ["id", "name"];
+    let condition = {
+        startDate: {
+            [Op.gt]: now
+        }
+    }
+
+    return Tender.findAll({ attributes: attributes, where: condition })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err.message
+        });
+};
+
 const tenderDetails = (id) => {
     let condition = {
         id: id
@@ -173,6 +192,7 @@ module.exports = {
     topBudgetTenders,
     activeTenders,
     closedTenders,
+    inactiveTenders,
     tenderDetails,
     addTender
 }

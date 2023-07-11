@@ -24,6 +24,10 @@ const getClosedTenders = async() => {
     return await daoTender.closedTenders();
 }
 
+const getInactiveTenders = async() => {
+    return await daoTender.inactiveTenders();
+}
+
 const getTenderDetails = async(id) => {
     return await daoTender.tenderDetails(id);
 }
@@ -38,6 +42,7 @@ module.exports = {
     getTopBudgetTenders,
     getActiveTenders,
     getClosedTenders,
+    getInactiveTenders,
     getTenderDetails,
     postTender
 }
