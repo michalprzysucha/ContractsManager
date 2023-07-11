@@ -21,6 +21,9 @@ Baza danych opiera się na następujących encjach:
 - oferty (offers),
 - instytucje publiczne (contracting authorities),
 - firmy (companies).
+
+![diagram_encji](https://github.com/michalprzysucha/PAI_projekt_grupowy/assets/64420379/b3e44d1a-5521-4b94-940f-2e89fd8ea335)
+
 Atrybuty encji:
 1. Tenders: reprezentują przetargi ogłoszone przez instytucje publiczne
 - id, 
