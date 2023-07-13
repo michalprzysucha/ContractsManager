@@ -36,28 +36,39 @@ const OfferForm = (props) => {
         const form = e.target;
         const formData = new FormData(form);
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-type': "application/json"
-            },
-            body: JSON.stringify(
-                {
-                    submissionDate: date,
-                    price: formData.get("cena"),
-                    company: formData.get("comp")
-                }
-            )
-        }
+        const formPrice = formData.get("cena")
+        const formCompany = formData.get("comp")
 
-        fetch(`http://localhost:3000/offers/add/${id}`, requestOptions) 
-            .then((response)=> {
-                if (response.status === 200) {
-                    setAdded(true)
-                } else {
-                    setServerError(true)
-                }
-            })
+        if(/^$|^\s+$/.test(formPrice)){
+            alert("Proszę wpisać budżet!")
+        }
+        else if(formCompany==="-1"){
+            alert("Proszę wpisać firmę zamawiającą!")
+        }
+        else {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-type': "application/json"
+                },
+                body: JSON.stringify(
+                    {
+                        submissionDate: date,
+                        price: formPrice,
+                        company: formCompany
+                    }
+                )
+            }
+            
+            fetch(`http://localhost:3000/offers/add/${id}`, requestOptions)
+                .then((response) => {
+                    if (response.status === 200) {
+                        setAdded(true)
+                    } else {
+                        setServerError(true)
+                    }
+                })
+        }
     }
 
 
