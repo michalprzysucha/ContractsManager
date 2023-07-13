@@ -22,8 +22,20 @@ const getCompanies = () => {
         });
 };
 
+const getCompanyByName = (companyName) => {
+    let condition =  { name: companyName };
+    return Company.findOne({ where: condition })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err.message
+        });
+};
+
 module.exports = {
     addCompany,
-    getCompanies
+    getCompanies,
+    getCompanyByName
 }
 

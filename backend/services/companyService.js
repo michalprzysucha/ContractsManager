@@ -12,7 +12,13 @@ const getCompanies = async() => {
     return await daoCompany.getCompanies();
 }
 
+const getCompanyByName = async(name) => {
+    return await daoCompany.getCompanyByName(name);
+}
+
+
 module.exports = {
     postCompany,
-    getCompanies
+    getCompanies,
+    getCompanyByName
 }

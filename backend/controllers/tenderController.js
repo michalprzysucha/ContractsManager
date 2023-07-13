@@ -56,7 +56,7 @@ const postTender = async(req,res) => {
     }
     else{
         console.log(result)
-        res.sendStatus(400)
+        res.sendStatus(500)
     }
 }
 

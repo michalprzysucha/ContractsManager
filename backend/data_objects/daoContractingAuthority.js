@@ -22,8 +22,20 @@ const getCa = () => {
         });
 };
 
+const getCaByName = (caName) => {
+    let condition =  { name: caName };
+    return ContractingAuthority.findOne({ where: condition })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err.message
+        });
+};
+
 module.exports = {
     addCa,
-    getCa
+    getCa,
+    getCaByName
 }
 

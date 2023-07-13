@@ -40,7 +40,15 @@ const ClientForm = (props) => {
                 .then((response) => {
                     if (response.status === 200) {
                         setAdded(true)
-                    } else {
+                    } else if (response.status === 409) {
+                        if(props.value === "company") {
+                            alert("Istnieje już firma o podanej nazwie!")
+                        }
+                        else{
+                            alert("Istnieje już instytucja o podanej nazwie!")
+                        }
+                    }
+                    else{
                         setServerError(true);
                     }
                 })

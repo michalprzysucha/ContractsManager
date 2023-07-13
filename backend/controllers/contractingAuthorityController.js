@@ -5,17 +5,24 @@
 const caService = require('../services/contractingAuthorityService');
 
 const postCa = async(req,res) => {
-    const ca = {
-        name: req.body.name
-    };
+    const caName = req.body.name
 
-    let result = await caService.postCa(ca);
-    if(result===1) {
-        res.sendStatus(200)
+    const exists = await caService.getCaByName(caName);
+    if(exists===null) {
+        const ca = {
+            name: caName
+        };
+
+        let result = await caService.postCa(ca);
+        if (result === 1) {
+            res.sendStatus(200)
+        } else {
+            console.log(result)
+            res.sendStatus(500)
+        }
     }
     else{
-        console.log(result)
-        res.sendStatus(400)
+        res.sendStatus(409)
     }
 }
 

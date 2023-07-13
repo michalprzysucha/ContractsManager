@@ -5,17 +5,24 @@
 const companyService = require('../services/companyService');
 
 const postCompany = async(req,res) => {
-    const company = {
-        name: req.body.name
-    };
+    const companyName = req.body.name
 
-    let result = await companyService.postCompany(company);
-    if(result===1) {
-        res.sendStatus(200)
+    const exists = await companyService.getCompanyByName(companyName);
+    if(exists===null) {
+        const company = {
+            name: companyName
+        };
+
+        let result = await companyService.postCompany(company);
+        if (result === 1) {
+            res.sendStatus(200)
+        } else {
+            console.log(result)
+            res.sendStatus(500)
+        }
     }
     else{
-        console.log(result)
-        res.sendStatus(400)
+        res.sendStatus(409)
     }
 }
 
