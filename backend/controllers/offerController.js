@@ -3,10 +3,8 @@
  */
 
 const offerService = require('../services/offerService');
-const companyService = require("../services/companyService");
 
 const postOffer = async(req,res) => {
-    const companies = await companyService.getCompanies();
     const offer = {
         submissionDate: new Date(),
         price: req.body.price,
@@ -23,7 +21,6 @@ const postOffer = async(req,res) => {
         console.log(result)
         res.sendStatus(400)
     }
-    // res.render("offerForm", {success: success, companies: companies});
 }
 
 module.exports = {

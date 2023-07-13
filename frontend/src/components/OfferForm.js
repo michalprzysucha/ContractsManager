@@ -8,9 +8,6 @@ const OfferForm = (props) => {
     const [added, setAdded] = useState(false);
     const [companies, setCompanies] = useState('');
     let id = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
-    console.log(id);
-    const date = new Date();
-
 
     useEffect(() => {
         document.title='Dodaj ofertę do przetargu';
@@ -53,7 +50,6 @@ const OfferForm = (props) => {
                 },
                 body: JSON.stringify(
                     {
-                        submissionDate: date,
                         price: formPrice,
                         company: formCompany
                     }
