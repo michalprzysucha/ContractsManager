@@ -29,10 +29,8 @@ const MostActiveTenders = (props) => {
                             {props.value==="expiring" ? (
                                 <TimeLeft value={tender.endDate} />
                             ) : (
-                                props.value==="top-budget" ? (
+                                props.value==="top-budget" && (
                                     <>{tender.budget} zł</>
-                                ) : (
-                                    null
                                 )
                             )}
                         </p>

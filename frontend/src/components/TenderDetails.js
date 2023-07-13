@@ -30,13 +30,11 @@ const TenderDetails = () => {
             <p><b>Instytucja zamawiająca:</b> {tender.contractingAuthority.name} </p>
             <p><b>Data i godzina rozpoczęcia przetargu:</b> {new Date(tender.startDate).toLocaleDateString("pl")} {new Date(tender.startDate).toLocaleTimeString("pl")}</p>
             <p><b>Data i godzina zakończenia przetargu:</b> {new Date(tender.endDate).toLocaleDateString("pl")} {new Date(tender.endDate).toLocaleTimeString("pl")}</p>
-            {tender.description ?
+            {tender.description &&
                 <>
                     <p><b>Opis</b>:</p>
                     <p>{tender.description}</p>
                 </>
-            :
-                <></>
             }
             <p><b>Maksymalny budżet zamawiającego: </b>{tender.budget.toFixed(2)} zł</p>
 
