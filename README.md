@@ -82,7 +82,7 @@ Za trasowanie żądań odpowiada plik router.js.
 
 Komponentem rozszerzającym podstawowe funkcjonalności aplikacji jest strona główna (Home.js), który zawiera podsumowania dotyczące najbardziej aktywnych przetargów, przetargów z największym budżetem i przetargi bliskie zakończeniu. 
 
-| ![podsumowania](https://github.com/michalprzysucha/PAI_projekt_grupowy/assets/64420379/05455cbf-2777-4a83-a5d2-046c517cf8d1) |
+| ![tenderSummaries](https://github.com/michalprzysucha/PAI_projekt_grupowy/assets/64420379/145eaae2-cb98-416f-8f0c-29882c3cfdb3) |
 |:--:| 
 | *Fragment pliku TendersSummaries.js* |
 
