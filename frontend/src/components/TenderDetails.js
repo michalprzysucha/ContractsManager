@@ -38,17 +38,23 @@ const TenderDetails = () => {
             }
             <p><b>Maksymalny budżet zamawiającego: </b>{tender.budget.toFixed(2)} zł</p>
 
-            {now < new Date(tender.endDate) &&
+            {new Date(tender.endDate) > now && new Date(tender.startDate) <= now &&
                 <>
                     <p><b>Do zakończenia przetargu pozostało:</b> <TimeLeft value={tender.endDate}/></p>
                 </>}
 
-            {new Date(tender.startDate) <= now && new Date(tender.endDate) > now ? (
+            {new Date(tender.endDate) > now ? (
                 <>
-                    <h4>Przetarg jest aktywny. Możesz dodać ofertę!</h4>
-                    <a href={`/offers/add/${tender.id}`}>
-                        <button type="button">Dodaj ofertę</button>
-                    </a>
+                    {new Date(tender.startDate) <= now ? (
+                        <>
+                            <h4> Przetarg jest aktywny. Możesz dodać ofertę! </h4>
+                            <a href={`/offers/add/${tender.id}`}>
+                                <button type="button">Dodaj ofertę</button>
+                            </a>
+                        </>
+                    ) : (
+                        <h4> Przetarg jeszcze się nie zaczął! </h4>
+                    )}
                 </>
             ) : (
                 <>
